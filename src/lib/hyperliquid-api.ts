@@ -4,6 +4,7 @@ import { OrderBook } from "@/types/hyperliquid";
 import { FundingUpdate } from "@/types/hyperliquid";
 import { MetaAndAssetCtxsResponse } from "@/types/hyperliquid";
 import { MetaResponse } from "@/types/hyperliquid";
+import { UserFill } from "@/types/hyperliquid";
 
 // lib/hyperliquid-api.ts
 const API_BASE = "https://api.hyperliquid.xyz";
@@ -63,6 +64,19 @@ export class HyperLiquidAPI {
       type: "userNonFundingLedgerUpdates",
       user,
       startTime,
+      ...(endTime && { endTime }),
+    });
+  }
+
+  async getUserFills(
+    user: string,
+    startTime?: number,
+    endTime?: number
+  ): Promise<UserFill[]> {
+    return this.post("/info", {
+      type: "userFills",
+      user,
+      ...(startTime && { startTime }),
       ...(endTime && { endTime }),
     });
   }

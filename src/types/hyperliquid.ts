@@ -105,6 +105,21 @@ export interface LedgerUpdate {
   };
 }
 
+export interface UserFill {
+  coin: string;
+  px: string; // price
+  sz: string; // size
+  side: "A" | "B"; // A = long/buy, B = short/sell
+  time: number; // timestamp
+  startPosition: string;
+  dir: string; // direction of trade
+  closedPnl: string; // realized PnL
+  hash: string;
+  oid: number; // order ID
+  crossed: boolean;
+  fee: string;
+}
+
 export interface CompletedTrade {
   coin: string;
   direction: "long" | "short";

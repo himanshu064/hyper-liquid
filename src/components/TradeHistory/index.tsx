@@ -437,19 +437,23 @@ export function TradeHistory() {
       )}
 
       {/* Empty State */}
-      {!loading &&
-        trades.length === 0 &&
-        !accountState &&
-        walletAddress &&
-        !error && (
-          <Card>
-            <CardContent className="text-center py-8">
+      {!loading && trades.length === 0 && walletAddress && !error && (
+        <Card>
+          <CardContent className="text-center py-8">
+            <div className="space-y-4">
               <p className="text-muted-foreground">
-                No data found for this address.
+                {accountState ? "No completed trades found for this address." : "No data found for this address."}
               </p>
-            </CardContent>
-          </Card>
-        )}
+              {accountState && (
+                <div className="text-sm text-muted-foreground">
+                  <p>This address has current positions but no completed trade history.</p>
+                  <p>Completed trades will appear here after positions are closed.</p>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
